@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_CfM_wDgkEfClM7fAaSVQdg" name="diagramKonceptualny">
+  <packagedElement xmi:type="uml:Class" xmi:id="_MDYEsDgkEfClM7fAaSVQdg" name="Author">
+    <ownedAttribute xmi:id="_RaKjMDgkEfClM7fAaSVQdg" name="name"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_e0v5ADgkEfClM7fAaSVQdg" name="Book">
+    <ownedAttribute xmi:id="_WpmAADglEfClM7fAaSVQdg" name="title"/>
+    <ownedAttribute xmi:id="_Z5aK8DglEfClM7fAaSVQdg" name="year"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_hmPJMDgkEfClM7fAaSVQdg" name="Publisher">
+    <ownedAttribute xmi:id="_fD6g8DglEfClM7fAaSVQdg" name="name"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jwu1YDglEfClM7fAaSVQdg" name="AuthorBooks" memberEnd="_oo2a4DglEfClM7fAaSVQdg _3PTG4DglEfClM7fAaSVQdg">
+    <ownedEnd xmi:id="_oo2a4DglEfClM7fAaSVQdg" name="author" type="_MDYEsDgkEfClM7fAaSVQdg" association="_jwu1YDglEfClM7fAaSVQdg"/>
+    <ownedEnd xmi:id="_3PTG4DglEfClM7fAaSVQdg" name="books" type="_e0v5ADgkEfClM7fAaSVQdg" association="_jwu1YDglEfClM7fAaSVQdg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5W00EDglEfClM7fAaSVQdg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4nr2IDglEfClM7fAaSVQdg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="__mc_EDglEfClM7fAaSVQdg" name="BooksPublishers" memberEnd="_EOm18DgmEfClM7fAaSVQdg _Ksk-8DgmEfClM7fAaSVQdg">
+    <ownedEnd xmi:id="_EOm18DgmEfClM7fAaSVQdg" name="books" type="_e0v5ADgkEfClM7fAaSVQdg" association="__mc_EDglEfClM7fAaSVQdg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_FY2bgDgmEfClM7fAaSVQdg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FNT54DgmEfClM7fAaSVQdg" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_Ksk-8DgmEfClM7fAaSVQdg" name="publishers" type="_hmPJMDgkEfClM7fAaSVQdg" association="__mc_EDglEfClM7fAaSVQdg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NVOcMDgmEfClM7fAaSVQdg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NM18QDgmEfClM7fAaSVQdg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>

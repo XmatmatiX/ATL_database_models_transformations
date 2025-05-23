@@ -1,0 +1,13 @@
+-- @nsURI MM=http://www.eclipse.org/uml2/5.0.0/UML
+
+module conceptual2physical;
+create OUT : MM refining IN : MM;
+
+-- do zrobienia:
+-- dodawanie typu do każdego property w klasie
+-- dodawanie ID do tabeli jeśli nie istnieje
+-- dodawanie klucza obcego do tabeli
+-- stworzenie tabeli pośredniej dla połączenia wiele do wielu
+
+-- odpowiednikiem tabeli w UML jest klasa
+-- odpowiednikiem relacji jest asocjacja
