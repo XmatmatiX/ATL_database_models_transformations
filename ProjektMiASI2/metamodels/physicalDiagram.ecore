@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="physicalDiagram" nsURI="physical" nsPrefix="physical">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Tables" upperBound="-1"
+        eType="#//Table" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Table">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="Columns" lowerBound="1"
-        upperBound="-1" eType="#//Column"/>
+        upperBound="-1" eType="#//Column" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="Relations" upperBound="-1"
-        eType="#//Relationship"/>
+        eType="#//Relationship" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Column">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -21,12 +26,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Relationship">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="SourceTable" lowerBound="1"
-        eType="#//Table"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="TargetTable" lowerBound="1"
         eType="#//Table"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SourceRelationshipType"
-        lowerBound="1" eType="#//RelationType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="TargetRelationshipType"
         lowerBound="1" eType="#//RelationType"/>
   </eClassifiers>

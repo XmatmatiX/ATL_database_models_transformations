@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<physical:Model
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:physical="physical"
+    xsi:schemaLocation="physical ../metamodels/physicalDiagram.ecore">
+  <Tables Name="Book">
+    <Columns
+        Name="ID"
+        PrimaryKey="true"/>
+    <Columns
+        Name="Title"
+        Type="Varchar"
+        IsUnique="true"/>
+    <Columns
+        Name="Release Date"
+        Type="Date"/>
+    <Columns
+        Name="AuthorID"
+        ForeignKey="true"/>
+    <Relations
+        TargetTable="//@Tables.3"
+        TargetRelationshipType="Many"/>
+    <Relations
+        TargetTable="//@Tables.1"/>
+  </Tables>
+  <Tables Name="Author">
+    <Columns
+        Name="AuthorID"/>
+    <Columns
+        Name="Name"/>
+    <Relations
+        TargetTable="//@Tables.0"
+        TargetRelationshipType="Many"/>
+  </Tables>
+  <Tables Name="Publisher">
+    <Columns
+        Name="Name"/>
+    <Relations
+        TargetTable="//@Tables.3"
+        TargetRelationshipType="Many"/>
+  </Tables>
+  <Tables Name="BooksPublishers">
+    <Columns
+        Name="BooksPublishersID"
+        PrimaryKey="true"/>
+    <Columns
+        Name="BookID"
+        ForeignKey="true"/>
+    <Columns
+        Name="PublisherID"
+        ForeignKey="true"/>
+    <Relations
+        TargetTable="//@Tables.0"/>
+    <Relations
+        TargetTable="//@Tables.2"/>
+  </Tables>
+</physical:Model>
