@@ -19,7 +19,7 @@
         Type="Varchar"/>
     <Columns
         Name="AuthorID"
-        ForeignKey="true"/>
+        ForeignKey="//@Tables.1"/>
   </Tables>
   <Tables Name="Author">
     <Columns
@@ -41,12 +41,6 @@
     <Columns
         Name="BookPublisherID"
         PrimaryKey="true"/>
-    <Columns
-        Name="BookID"
-        ForeignKey="true"/>
-    <Columns
-        Name="PublisherID"
-        ForeignKey="true"/>
   </Tables>
   <Relatioships
       TargetTable="//@Tables.1"

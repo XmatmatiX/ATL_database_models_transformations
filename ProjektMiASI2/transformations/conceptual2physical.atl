@@ -5,10 +5,10 @@ module conceptual2physical;
 create OUT : physical from IN : conceptual;
 
 -- do zrobienia:
--- dodawanie typu do każdego property(conceptual)
--- dodawanie ID do tabeli jeśli nie istnieje(nowa kolumna o nazwie ID)
--- dodawanie klucza obcego do tabeli (nowa kolumna z odpowiednimi property)
--- stworzenie tabeli pośredniej dla połączenia wiele do wielu
+-- dodawanie typu do każdego property(conceptual) - zrobione
+-- dodawanie ID do tabeli jeśli nie istnieje(nowa kolumna o nazwie ID) - zrobione
+-- dodawanie klucza obcego do tabeli (nowa kolumna z odpowiednimi property) - zrobione
+-- stworzenie tabeli pośredniej dla połączenia wiele do wielu - zrobione
 
 -- Helper do sprawdzania czy tablica posiada klucz główny
 helper context conceptual!Table def: hasID() : Boolean =
@@ -41,6 +41,14 @@ rule CreateTable {
 					else Sequence {} 
 					endif
 				)
+				->union(
+					conceptual!Relationship.allInstances()
+						->select(r | 
+							(r.SourceTable = s and r.TargetRelationType.toString() = 'One') or
+							(r.TargetTable = s and r.SourceRelationType.toString() = 'One')
+						)
+						->collect(r | thisModule.createForeignKeyColumn(s, r))
+				)
 		)
 }
 
@@ -51,7 +59,10 @@ lazy rule attribute2column {
    to
       t : physical!Column (
          Name <- s.Name,
-		 PrimaryKey <- isKey
+		 PrimaryKey <- isKey,
+		 Type <- 'Integer',
+		 IsNullable <- false,
+		 IsUnique <- isKey
       )
 }
 
@@ -62,7 +73,23 @@ lazy rule createIDcolumn {
 		t : physical!Column (
 			Name <- s + 'ID',
 			PrimaryKey <- true,
-			IsUnique <- true
+			IsUnique <- true,
+			Type <- 'Integer',
+		 	IsNullable <- false
+		)
+}
+
+lazy rule createForeignKeyColumn {
+	from
+		s : conceptual!Table,
+		r : conceptual!Relationship
+	to
+		fk : physical!Column (
+			Name <- 
+				if r.SourceTable = s then r.TargetTable.Name + 'ID'
+				else r.SourceTable.Name + 'ID' endif,
+			Type <- 'Integer',
+			ForeignKey <- if r.SourceTable = s then r.TargetTable else r.SourceTable endif
 		)
 }
 
@@ -71,9 +98,10 @@ rule CreateRelationship {
 		s : conceptual!Relationship (not s.isManyToMany())
 	to 
 		t : physical!Relationship(
-			SourceRelationTyp <- 1,
+			test <- s.SourceRelationType.toString(),
+			SourceRelationTyp <- s.SourceRelationType,
 			SourceTable <- thisModule.resolveTemp(s.SourceTable, 'table'),
-			TargetRelationType <- 2,
+			TargetRelationType <- s.TargetRelationType,
 			TargetTable <- thisModule.resolveTemp(s.TargetTable, 'table')
 		)
 }
@@ -92,26 +120,30 @@ rule CreateManyToMany {
 		),
 		sourceID : physical!Column (
 			Name <- s.SourceTable.Name + 'ID',
-			ForeignKey <- true
+			ForeignKey <- s.SourceTable,
+			Type <- 'Integer'
 		),
 		targetID : physical!Column (
 			Name <- s.TargetTable.Name + 'ID',
-			ForeignKey <- true
+			ForeignKey <- s.TargetTable,
+			Type <- 'Integer'
 		),
 		primaryKey : physical!Column (
 			Name <- s.SourceTable.Name + s.TargetTable.Name + 'ID',
-			PrimaryKey <- true
+			PrimaryKey <- true,
+			IsUnique <- true,
+			Type <- 'Integer'
 		),
 		relationTarget : physical!Relationship (
-			SourceRelationTyp <- 2,			--tu trzeba jakoś przypisać wartość enum na Many
+			SourceRelationTyp <- 'Many',			--tu trzeba jakoś przypisać wartość enum na Many
 			SourceTable <- helperTable,
-			TargetRelationType <- 0,		--tu trzeba jakoś przypisać wartość enum na One
+			TargetRelationType <- 'One',		--tu trzeba jakoś przypisać wartość enum na One
 			TargetTable <- thisModule.resolveTemp(s.TargetTable, 'table')
 		),
 		relationSource : physical!Relationship (
-			SourceRelationTyp <-0 ,			--tu trzeba jakoś przypisać wartość enum na One
+			SourceRelationTyp <- 'One',			--tu trzeba jakoś przypisać wartość enum na One
 			SourceTable <- thisModule.resolveTemp(s.SourceTable, 'table'),
-			TargetRelationType <- 2,		--tu trzeba jakoś przypisać wartość enum na Many
+			TargetRelationType <- 'Many',		--tu trzeba jakoś przypisać wartość enum na Many
 			TargetTable <- helperTable
 		)
 }
