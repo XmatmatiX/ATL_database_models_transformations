@@ -1,0 +1,7 @@
+-- @nsURI MM=http://www.eclipse.org/uml2/5.0.0/UML
+-- @path physical=/ProjektMiASI2/metamodels/physicalDiagram.ecore
+
+module physical2class;
+create OUT : MM from IN : physical;
+
+--zmiana z modelu ecore na model w UML. w sumie to tyle xd

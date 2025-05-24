@@ -1,13 +1,11 @@
--- @nsURI MM=http://www.eclipse.org/uml2/5.0.0/UML
+-- @path physical=/ProjektMiASI2/metamodels/physicalDiagram.ecore
+-- @path conceptual=/ProjektMiASI2/metamodels/conceptualDiagram.ecore
 
 module conceptual2physical;
-create OUT : MM refining IN : MM;
+create OUT : physical from IN : conceptual;
 
 -- do zrobienia:
--- dodawanie typu do każdego property w klasie
--- dodawanie ID do tabeli jeśli nie istnieje
--- dodawanie klucza obcego do tabeli
+-- dodawanie typu do każdego property(conceptual)
+-- dodawanie ID do tabeli jeśli nie istnieje(nowa kolumna o nazwie ID)
+-- dodawanie klucza obcego do tabeli (nowa kolumna z odpowiednimi property)
 -- stworzenie tabeli pośredniej dla połączenia wiele do wielu
-
--- odpowiednikiem tabeli w UML jest klasa
--- odpowiednikiem relacji jest asocjacja
