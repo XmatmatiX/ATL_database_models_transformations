@@ -3,30 +3,33 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="http://example.com/conceptual"
-    xsi:schemaLocation="http://example.com/conceptual ../metamodels/conceptualDiagram.ecore">
+    xsi:schemaLocation="http://example.com/conceptual ../metamodels/conceptualDiagram.ecore"
+    Name="BookInfo">
   <Tables Name="Book">
     <Properties
         Name="Title"/>
     <Properties
-        Name="Release Date"/>
-    <Relations
-        TargetTabel="//@Tables.1"/>
-    <Relations
-        TargetTabel="//@Tables.2"
-        TargetRelationType="Many"/>
+        Name="ReleaseDate"/>
+    <Properties
+        Name="Genre"/>
   </Tables>
   <Tables Name="Author">
     <Properties
         Name="Name"/>
-    <Relations
-        TargetTabel="//@Tables.0"
-        TargetRelationType="Many"/>
+    <Properties
+        Name="BirthDate"/>
   </Tables>
   <Tables Name="Publisher">
     <Properties
         Name="Name"/>
-    <Relations
-        TargetTabel="//@Tables.0"
-        TargetRelationType="Many"/>
   </Tables>
+  <Relatioships
+      SourceRelationType="Many"
+      TargetTable="//@Tables.1"
+      SourceTable="//@Tables.0"/>
+  <Relatioships
+      TargetRelationType="Many"
+      SourceRelationType="Many"
+      TargetTable="//@Tables.2"
+      SourceTable="//@Tables.0"/>
 </Model>

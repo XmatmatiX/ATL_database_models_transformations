@@ -5,22 +5,26 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="Tables" upperBound="-1"
         eType="#//Table" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Relatioships" upperBound="-1"
+        eType="#//Relationship" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Table">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="Properties" upperBound="-1"
         eType="#//Property" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="Relations" upperBound="-1"
-        eType="#//Relationship" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Property">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Relationship">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="TargetTabel" lowerBound="1"
-        eType="#//Table"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="TargetRelationType" lowerBound="1"
         eType="#//RelationType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SourceRelationType" lowerBound="1"
+        eType="#//RelationType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="TargetTable" lowerBound="1"
+        eType="#//Table"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SourceTable" lowerBound="1"
+        eType="#//Table"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="RelationType">
     <eLiterals name="One" value="2" literal="One"/>

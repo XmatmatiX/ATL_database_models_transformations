@@ -5,3 +5,12 @@ module physical2class;
 create OUT : MM from IN : physical;
 
 --zmiana z modelu ecore na model w UML. w sumie to tyle xd
+
+rule table {
+	from
+		s : physical!Table
+	to 
+		t : MM!Class (
+			name <- s.Name
+		)
+}

@@ -9,3 +9,109 @@ create OUT : physical from IN : conceptual;
 -- dodawanie ID do tabeli jeśli nie istnieje(nowa kolumna o nazwie ID)
 -- dodawanie klucza obcego do tabeli (nowa kolumna z odpowiednimi property)
 -- stworzenie tabeli pośredniej dla połączenia wiele do wielu
+
+-- Helper do sprawdzania czy tablica posiada klucz główny
+helper context conceptual!Table def: hasID() : Boolean =
+  self.Properties->exists(a |
+    a.Name.toLower() = 'id' or
+    a.Name.toLower() = self.Name.toLower() + 'id'
+  );
+
+-- Helper do sprawdzania czy parametr jest kluczem głównym
+helper context conceptual!Table def: hasIDNamed(Name : String) : Boolean =
+   Name.toLower() = 'id' or Name.toLower() = self.Name.toLower() + 'id';
+
+-- Helper do sprawdzania relacji wiele do wielu
+helper context conceptual!Relationship def: isManyToMany() : Boolean =
+  self.SourceRelationType.toString() = 'Many' and		--poprawić na sprawdzanie many bo to nie działa :c
+  self.TargetRelationType.toString() = 'Many';
+
+
+rule CreateTable {
+	from
+		s : conceptual!Table
+	to 
+		table : physical!Table (
+			Name <- s.Name,
+			Columns <- 
+				s.Properties->collect(prop | thisModule.attribute2column(prop, s.hasIDNamed(prop.Name)))
+				-> union(
+					if not s.hasID() then
+						Sequence { thisModule.createIDcolumn(s.Name)}
+					else Sequence {} 
+					endif
+				)
+		)
+}
+
+lazy rule attribute2column {
+   from
+      s : conceptual!Property,
+      isKey : Boolean
+   to
+      t : physical!Column (
+         Name <- s.Name,
+		 PrimaryKey <- isKey
+      )
+}
+
+lazy rule createIDcolumn {
+	from
+		s: String
+	to
+		t : physical!Column (
+			Name <- s + 'ID',
+			PrimaryKey <- true,
+			IsUnique <- true
+		)
+}
+
+rule CreateRelationship {
+	from
+		s : conceptual!Relationship (not s.isManyToMany())
+	to 
+		t : physical!Relationship(
+			SourceRelationTyp <- 1,
+			SourceTable <- thisModule.resolveTemp(s.SourceTable, 'table'),
+			TargetRelationType <- 2,
+			TargetTable <- thisModule.resolveTemp(s.TargetTable, 'table')
+		)
+}
+
+rule CreateManyToMany {
+	from
+		s : conceptual!Relationship (s.isManyToMany())
+	to 
+		helperTable : physical!Table (
+			Name <- s.SourceTable.Name + s.TargetTable.Name,
+			Columns <- Sequence {
+				primaryKey,
+				sourceID,
+				targetID
+			}
+		),
+		sourceID : physical!Column (
+			Name <- s.SourceTable.Name + 'ID',
+			ForeignKey <- true
+		),
+		targetID : physical!Column (
+			Name <- s.TargetTable.Name + 'ID',
+			ForeignKey <- true
+		),
+		primaryKey : physical!Column (
+			Name <- s.SourceTable.Name + s.TargetTable.Name + 'ID',
+			PrimaryKey <- true
+		),
+		relationTarget : physical!Relationship (
+			SourceRelationTyp <- 2,			--tu trzeba jakoś przypisać wartość enum na Many
+			SourceTable <- helperTable,
+			TargetRelationType <- 0,		--tu trzeba jakoś przypisać wartość enum na One
+			TargetTable <- thisModule.resolveTemp(s.TargetTable, 'table')
+		),
+		relationSource : physical!Relationship (
+			SourceRelationTyp <-0 ,			--tu trzeba jakoś przypisać wartość enum na One
+			SourceTable <- thisModule.resolveTemp(s.SourceTable, 'table'),
+			TargetRelationType <- 2,		--tu trzeba jakoś przypisać wartość enum na Many
+			TargetTable <- helperTable
+		)
+}

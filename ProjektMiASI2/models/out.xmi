@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="http://example.com/physical">
+  <Table Name="Book">
+    <Columns Name="Title"/>
+    <Columns Name="ReleaseDate"/>
+    <Columns Name="Genre"/>
+    <Columns Name="BookID" IsUnique="true" PrimaryKey="true"/>
+  </Table>
+  <Table Name="Author">
+    <Columns Name="Name"/>
+    <Columns Name="BirthDate"/>
+    <Columns Name="AuthorID" IsUnique="true" PrimaryKey="true"/>
+  </Table>
+  <Table Name="Publisher">
+    <Columns Name="Name"/>
+    <Columns Name="PublisherID" IsUnique="true" PrimaryKey="true"/>
+  </Table>
+  <Relationship TargetTable="/1" SourceRelationTyp="Many" SourceTable="/0"/>
+  <Relationship TargetTable="/2" TargetRelationType="Many" SourceRelationTyp="Many" SourceTable="/0"/>
+</xmi:XMI>

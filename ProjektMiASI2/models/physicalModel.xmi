@@ -1,49 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<physical:Model
-    xmi:version="2.0"
+<Model xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:physical="physical"
-    xsi:schemaLocation="physical ../metamodels/physicalDiagram.ecore">
+    xmlns="http://example.com/physical"
+    xsi:schemaLocation="http://example.com/physical ../metamodels/physicalDiagram.ecore">
   <Tables Name="Book">
     <Columns
         Name="ID"
         PrimaryKey="true"/>
     <Columns
-        Name="Title"
-        Type="Varchar"
-        IsUnique="true"/>
+        Name="Name"
+        Type="Varchar"/>
     <Columns
-        Name="Release Date"
+        Name="ReleaseDate"
         Type="Date"/>
+    <Columns
+        Name="Genre"
+        Type="Varchar"/>
     <Columns
         Name="AuthorID"
         ForeignKey="true"/>
-    <Relations
-        TargetTable="//@Tables.3"
-        TargetRelationshipType="Many"/>
-    <Relations
-        TargetTable="//@Tables.1"/>
   </Tables>
   <Tables Name="Author">
     <Columns
-        Name="AuthorID"/>
+        Name="ID"
+        PrimaryKey="true"/>
     <Columns
-        Name="Name"/>
-    <Relations
-        TargetTable="//@Tables.0"
-        TargetRelationshipType="Many"/>
+        Name="Name"
+        Type="Varchar"/>
+    <Columns
+        Name="BirthDate"
+        Type="Date"/>
   </Tables>
   <Tables Name="Publisher">
     <Columns
-        Name="Name"/>
-    <Relations
-        TargetTable="//@Tables.3"
-        TargetRelationshipType="Many"/>
+        Name="ID"
+        PrimaryKey="true"/>
   </Tables>
-  <Tables Name="BooksPublishers">
+  <Tables Name="BookPublisher">
     <Columns
-        Name="BooksPublishersID"
+        Name="BookPublisherID"
         PrimaryKey="true"/>
     <Columns
         Name="BookID"
@@ -51,9 +47,17 @@
     <Columns
         Name="PublisherID"
         ForeignKey="true"/>
-    <Relations
-        TargetTable="//@Tables.0"/>
-    <Relations
-        TargetTable="//@Tables.2"/>
   </Tables>
-</physical:Model>
+  <Relatioships
+      TargetTable="//@Tables.1"
+      SourceRelationTyp="Many"
+      SourceTable="//@Tables.0"/>
+  <Relatioships
+      TargetTable="//@Tables.3"
+      TargetRelationType="Many"
+      SourceTable="//@Tables.0"/>
+  <Relatioships
+      TargetTable="//@Tables.2"
+      TargetRelationType="Many"
+      SourceTable="//@Tables.2"/>
+</Model>
