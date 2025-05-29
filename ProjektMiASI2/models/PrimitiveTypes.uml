@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_SDsvEDurEfCyha4NYFSTqQ">
+  <packagedElement xmi:type="uml:Class" xmi:id="_VV4RgDurEfCyha4NYFSTqQ" name="Integer"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_VubUYDurEfCyha4NYFSTqQ" name="Boolean"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_VxpAcDurEfCyha4NYFSTqQ" name="Double"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_WIBgIDurEfCyha4NYFSTqQ" name="String"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_WMmeIDurEfCyha4NYFSTqQ" name="Float"/>
+</uml:Package>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<uml:Package xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_j7av0DuxEfCyha4NYFSTqQ">
+  <packagedElement xmi:type="uml:Class" xmi:id="_j7av0TuxEfCyha4NYFSTqQ" name="Book">
+    <ownedAttribute xmi:id="_j7av0juxEfCyha4NYFSTqQ" name="ID" isUnique="false" isID="true"/>
+    <ownedAttribute xmi:id="_j7av0zuxEfCyha4NYFSTqQ" name="Name" isUnique="false"/>
+    <ownedAttribute xmi:id="_j7av1DuxEfCyha4NYFSTqQ" name="ReleaseDate" isUnique="false"/>
+    <ownedAttribute xmi:id="_j7av1TuxEfCyha4NYFSTqQ" name="Genre" isUnique="false"/>
+    <ownedAttribute xmi:id="_j7av1juxEfCyha4NYFSTqQ" name="AuthorID" isUnique="false"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_j7av1zuxEfCyha4NYFSTqQ" name="Author">
+    <ownedAttribute xmi:id="_j7av2DuxEfCyha4NYFSTqQ" name="ID" isUnique="false" isID="true"/>
+    <ownedAttribute xmi:id="_j7av2TuxEfCyha4NYFSTqQ" name="Name" isUnique="false"/>
+    <ownedAttribute xmi:id="_j7av2juxEfCyha4NYFSTqQ" name="BirthDate" isUnique="false"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_j7av2zuxEfCyha4NYFSTqQ" name="Publisher">
+    <ownedAttribute xmi:id="_j7av3DuxEfCyha4NYFSTqQ" name="ID" isUnique="false" isID="true"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_j7av3TuxEfCyha4NYFSTqQ" name="BookPublisher">
+    <ownedAttribute xmi:id="_j7av3juxEfCyha4NYFSTqQ" name="BookPublisherID" isUnique="false" isID="true"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_j7av3zuxEfCyha4NYFSTqQ" memberEnd="_j7av4DuxEfCyha4NYFSTqQ _j7av4zuxEfCyha4NYFSTqQ">
+    <ownedEnd xmi:id="_j7av4DuxEfCyha4NYFSTqQ" name="book" type="_j7av0TuxEfCyha4NYFSTqQ" association="_j7av3zuxEfCyha4NYFSTqQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_j7av4TuxEfCyha4NYFSTqQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_j7av4juxEfCyha4NYFSTqQ" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_j7av4zuxEfCyha4NYFSTqQ" name="author" type="_j7av1zuxEfCyha4NYFSTqQ" association="_j7av3zuxEfCyha4NYFSTqQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_j7av5DuxEfCyha4NYFSTqQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_j7av5TuxEfCyha4NYFSTqQ" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_j7av5juxEfCyha4NYFSTqQ" memberEnd="_j7av5zuxEfCyha4NYFSTqQ _j7av6juxEfCyha4NYFSTqQ">
+    <ownedEnd xmi:id="_j7av5zuxEfCyha4NYFSTqQ" name="book" type="_j7av0TuxEfCyha4NYFSTqQ" association="_j7av5juxEfCyha4NYFSTqQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_j7av6DuxEfCyha4NYFSTqQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_j7av6TuxEfCyha4NYFSTqQ" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_j7av6juxEfCyha4NYFSTqQ" name="bookpublisher" type="_j7av3TuxEfCyha4NYFSTqQ" association="_j7av5juxEfCyha4NYFSTqQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_j7av6zuxEfCyha4NYFSTqQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_j7av7DuxEfCyha4NYFSTqQ" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_j7av7TuxEfCyha4NYFSTqQ" memberEnd="_j7av7juxEfCyha4NYFSTqQ _j7av8TuxEfCyha4NYFSTqQ">
+    <ownedEnd xmi:id="_j7av7juxEfCyha4NYFSTqQ" name="publisher" type="_j7av2zuxEfCyha4NYFSTqQ" association="_j7av7TuxEfCyha4NYFSTqQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_j7av7zuxEfCyha4NYFSTqQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_j7av8DuxEfCyha4NYFSTqQ" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_j7av8TuxEfCyha4NYFSTqQ" name="publisher" type="_j7av2zuxEfCyha4NYFSTqQ" association="_j7av7TuxEfCyha4NYFSTqQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_j7av8juxEfCyha4NYFSTqQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_j7av8zuxEfCyha4NYFSTqQ" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Package>

@@ -27,6 +27,18 @@ helper context conceptual!Relationship def: isManyToMany() : Boolean =
   self.TargetRelationType.toString() = 'Many';
 
 
+rule RecreateModel {
+	from
+		s : conceptual!Model
+	to 
+		t : physical!Model (
+			Name <- s.Name,
+			Tables <- physical!Table.allInstances()->select(c | not c.oclIsUndefined()),
+			Relatioships <- physical!Relationship.allInstances()->select(c | not c.oclIsUndefined())
+
+		)
+}
+
 rule CreateTable {
 	from
 		s : conceptual!Table

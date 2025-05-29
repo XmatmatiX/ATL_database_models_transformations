@@ -4,13 +4,64 @@
 module physical2class;
 create OUT : MM from IN : physical;
 
---zmiana z modelu ecore na model w UML. w sumie to tyle xd
+--zmiana z modelu ecore na model w UML
 
-rule table {
+
+rule CreatePackage {
+	from
+		s : physical!Model
+	to 
+		t : MM!Package (
+			name <- s.Name,
+			packagedElement <- Sequence {
+				MM!Class.allInstances(),
+				MM!Association.allInstances()
+			}
+		)
+}
+
+rule CreateClass {
 	from
 		s : physical!Table
 	to 
-		t : MM!Class (
-			name <- s.Name
+		class : MM!Class (
+			name <- s.Name,
+			ownedAttribute <- 
+				s.Columns -> collect(col | thisModule.column2property(col))			
+		)
+}
+
+lazy rule column2property {
+	from
+		s : physical!Column
+	to 
+		t : MM!Property (
+			name <- s.Name,
+			isID <- s.PrimaryKey,
+			isUnique <- s.IsUnique
+		)
+}
+
+rule CreateAssociacion {
+	from
+		s : physical!Relationship
+	to 
+		t : MM!Association (
+			memberEnd <- Sequence { start, end },
+			ownedEnd <- Sequence { start, end }
+		),
+		start : MM!Property (
+			name <- s.SourceTable.Name.toLower(),
+			lower <- if s.SourceRelationTyp = 'OneOrMany' then 1 else 0 endif,
+			upper <- if s.SourceRelationTyp = 'One' then 1 else -1 endif,
+			type <- thisModule.resolveTemp(s.SourceTable, 'class'),
+			association <- t
+		),
+		end : MM!Property (
+			name <- s.TargetTable.Name.toLower(),
+			lower <- if s.TargetRelationType = 'OneOrMany' then 1 else 0 endif,
+			upper <- if s.TargetRelationType = 'One' then 1 else -1 endif,
+			type <- thisModule.resolveTemp(s.TargetTable, 'class'),
+			association <- t
 		)
 }
