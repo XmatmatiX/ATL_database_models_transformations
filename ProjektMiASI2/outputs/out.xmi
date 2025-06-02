@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="http://example.com/physical" Name="BookInfo">
+<physical:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:physical="http://example.com/physical" Name="BookInfo">
   <Tables Name="Book">
     <Columns Name="Title"/>
     <Columns Name="ReleaseDate"/>
@@ -24,4 +24,4 @@
   <Relatioships TargetTable="//@Tables.1" SourceRelationTyp="Many" SourceTable="//@Tables.0" test="Many"/>
   <Relatioships TargetTable="//@Tables.2" SourceRelationTyp="Many" SourceTable="//@Tables.3"/>
   <Relatioships TargetTable="//@Tables.3" TargetRelationType="Many" SourceTable="//@Tables.0"/>
-</Model>
+</physical:Model>
