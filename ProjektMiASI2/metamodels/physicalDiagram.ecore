@@ -33,7 +33,6 @@
         eType="#//RelationType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="SourceTable" lowerBound="1"
         eType="#//Table"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="test" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DataTypes">
     <eLiterals name="Integer"/>

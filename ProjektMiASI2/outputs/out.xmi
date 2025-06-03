@@ -21,7 +21,7 @@
     <Columns Name="BookID" ForeignKey="//@Tables.0"/>
     <Columns Name="PublisherID" ForeignKey="//@Tables.2"/>
   </Tables>
-  <Relatioships TargetTable="//@Tables.1" SourceRelationTyp="Many" SourceTable="//@Tables.0" test="Many"/>
+  <Relatioships TargetTable="//@Tables.1" SourceRelationTyp="Many" SourceTable="//@Tables.0"/>
   <Relatioships TargetTable="//@Tables.2" SourceRelationTyp="Many" SourceTable="//@Tables.3"/>
   <Relatioships TargetTable="//@Tables.3" TargetRelationType="Many" SourceTable="//@Tables.0"/>
 </physical:Model>

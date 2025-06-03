@@ -110,7 +110,6 @@ rule CreateRelationship {
 		s : conceptual!Relationship (not s.isManyToMany())
 	to 
 		t : physical!Relationship(
-			test <- s.SourceRelationType.toString(),
 			SourceRelationTyp <- s.SourceRelationType,
 			SourceTable <- thisModule.resolveTemp(s.SourceTable, 'table'),
 			TargetRelationType <- s.TargetRelationType,
